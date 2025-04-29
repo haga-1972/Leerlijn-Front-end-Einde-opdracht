@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState} from "react";
 
 const API_URL = 'https://sandbox.api.high-mobility.com/';  // Vervang dit door de juiste URL van de API
-const API_KEY = 'JOUW_API_SLEUTEL "rzeVs5nnx5OCMQejjfQTjLE8Jb2ReFSU"';  // Vervang dit door jouw API-sleutel
+const API_KEY = 'https://JOUW_API_SLEUTEL "frontendopdracht:9WTihG0MZKy6eDBkbfwB"';  // Vervang dit door jouw API-sleutel
 
 export const getCars = async () => {
     try {

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoekresultaten - Top Verhuur Auto</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6dd5fa, #2980b9);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header, footer {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            flex: 1;
+            padding: 40px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .result-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+        .company-name {
+            font-size: 1.5em;
+            color: #3498db;
+        }
+        .details {
+            margin-top: 10px;
+        }
+        .loading {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Zoekresultaten
+</header>
+
+<main>
+    <h2>Top 5 beschikbare auto's</h2>
+
+    <div id="result-list" class="result-list">
+        <div class="loading">Resultaten laden...</div>
+    </div>
+
+</main>
+
+<footer>
+    &copy; 2025 Top Verhuur Auto
+</footer>
+
+<script>
+    async function getCarData() {
+        const accessToken = 'frontendopdracht:9WTihG0MZKy6eDBkbfwB'; // <--- Vul hier je eigen High-Mobility API key in
+
+        try {
+            const response = await fetch('https://sandbox.high-mobility.com/v1/vehicles', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) throw new Error('Kan voertuigen niet ophalen');
+
+            const data = await response.json();
+            const vehicleList = data.vehicles || [];
+
+            const resultList = document.getElementById('result-list');
+            resultList.innerHTML = ''; // Leegmaken
+
+            if (vehicleList.length === 0) {
+                resultList.innerHTML = '<div class="loading">Geen voertuigen gevonden.</div>';
+                return;
+            }
+
+            vehicleList.slice(0, 5).forEach(vehicle => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+          <div class="company-name">${vehicle.brand || 'Onbekend merk'}</div>
+          <div class="details">
+            Model: ${vehicle.model || 'Onbekend model'}<br>
+            Type: ${vehicle.vehicleType || 'N/A'}<br>
+            Energie: ${vehicle.fuelType || 'N/A'}
+          </div>
+        `;
+                resultList.appendChild(card);
+            });
+
+        } catch (error) {
+            console.error(error);
+            document.getElementById('result-list').innerHTML = '<div class="loading">Fout bij laden gegevens.</div>';
+        }
+    }
+
+    getCarData();
+</script>
+
+</body>
+</html>

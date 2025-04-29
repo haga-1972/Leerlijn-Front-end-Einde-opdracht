@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Instellingen | Autoverhuur Vergelijker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .info-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Gebruikersinstellingen</h1>
+
+<form id="settingsForm">
+    <label for="name">Naam</label>
+    <input type="text" id="name" name="name" placeholder="Je naam" required />
+
+    <label for="email">E-mailadres</label>
+    <input type="email" id="email" name="email" placeholder="bijv. naam@email.com" required />
+
+    <label for="preferredBrand">Voorkeursmerk auto</label>
+    <input type="text" id="preferredBrand" name="preferredBrand" placeholder="bijv. Tesla, BMW" />
+
+    <label for="fuelType">Voorkeur brandstoftype</label>
+    <select id="fuelType" name="fuelType">
+        <option value="">-- Kies brandstof --</option>
+        <option value="elektrisch">Elektrisch</option>
+        <option value="hybride">Hybride</option>
+        <option value="benzine">Benzine</option>
+        <option value="diesel">Diesel</option>
+    </select>
+
+    <label for="location">Voorkeurslocatie</label>
+    <input type="text" id="location" name="location" placeholder="bijv. Amsterdam" />
+
+    <button type="submit">Instellingen opslaan</button>
+</form>
+
+<div class="info-section">
+    <h2>Belangrijke informatie</h2>
+    <p><strong>Accountstatus:</strong> Actief</p>
+    <p><strong>Laatst ingelogd:</strong> 28 april 2025, 13:45</p>
+    <p><strong>Geregistreerd sinds:</strong> 10 februari 2025</p>
+</div>
+
+<script>
+    document.getElementById('settingsForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Instellingen succesvol opgeslagen!');
+    });
+</script>
+
+</body>
+</html>

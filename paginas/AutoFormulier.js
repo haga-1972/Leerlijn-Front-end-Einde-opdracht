@@ -17,7 +17,7 @@ function AutoLijst({ auto's, reserveerAuto }) {
 
 export default AutoLijst;
 AutoFormulier.js
-In dit formulier kunnen gebruikers een auto reserveren door hun naam en een datum in t
+In dit formulier kunnen gebruikers een auto reserveren door hun naam en een datum in te vullen
 
 import React, { useState } from "react";
 

@@ -1,66 +1,124 @@
-import React, { useState } from "react";
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Zoeken - Top Verhuur Auto</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6dd5fa, #2980b9);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header, footer {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1f618d;
+        }
+    </style>
+</head>
+<body>
 
-function CarRentalSearch() {
-    const [brand, setBrand] = useState("");
-    const [fuelType, setFuelType] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [location, setLocation] = useState("");
-    const [selectedCompanies, setSelectedCompanies] = useState([]);
+<header>
+    Auto Zoeken
+</header>
 
-    const handleSearch = async () => {
-        // API-aanroep naar High Mobility API met de zoekparameters
-        const response = await fetch("htps://high-mobility.com_URL", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`, // JWT-token voor authenticatie
-            },
-            // Stuur zoekparameters mee
-        });
+<main>
+    <div class="form-container">
+        <h2>Vind jouw perfecte huurauto</h2>
+        <form action="/zoekresultaten.html" method="GET">
 
-        const data = await response.json();
-        // Verwerk en toon de top 5
-    };
+            <label for="car-type">Welke auto zoek je?</label>
+            <input type="text" id="car-type" name="carType" placeholder="Bijvoorbeeld: SUV, Hatchback, Sedan" required>
 
-    return (
-            <div>
-                <form onSubmit={handleSearch}>
-                    <input
-                            type="text"
-                            value={brand}
-                            onChange={(e) => setBrand(e.target.value)}
-                            placeholder="Merk auto"
-                    />
-                    <select
-                            value={fuelType}
-                            onChange={(e) => setFuelType(e.target.value)}>
-                        <option value="electric">Elektrisch</option>
-                        <option value="hybrid">Hybride</option>
-                        <option value="petrol">Benzine</option>
+            <label for="start-date">Ophaaldatum:</label>
+            <input type="date" id="start-date" name="startDate" required>
 
-                    </select>
-                    <input
-                            type="date"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                    />
-                    <input
-                            type="date"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                    />
-                    <input
-                            type="text"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            placeholder="Ophaal- en terugbrenglocatie"
-                    />
-                    <button type="submit">Zoeken</button>
-                </form>
-                {/* Toon zoekresultaten hier */}
-            </div>
-    );
-}
+            <label for="end-date">Terugbrengdatum:</label>
+            <input type="date" id="end-date" name="endDate" required>
 
-export default CarRentalSearch;
+            <label for="companies">Kies maximaal 10 verhuurbedrijven:</label>
+            <select id="companies" name="companies" multiple size="6" required>
+                <option value="Hertz">Hertz</option>
+                <option value="Sixt">Sixt</option>
+                <option value="Avis">Avis</option>
+                <option value="Enterprise">Enterprise</option>
+                <option value="Europcar">Europcar</option>
+                <option value="CarJet">CarJet</option>
+                <option value="National">National</option>
+                <option value="Rentalcars">Rentalcars</option>
+                <option value="Thrifty">Thrifty</option>
+                <option value="Discover Cars">Discover Cars</option>
+            </select>
+
+            <button type="submit">Zoeken</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 Top Verhuur Auto
+</footer>
+
+</body>
+</html>

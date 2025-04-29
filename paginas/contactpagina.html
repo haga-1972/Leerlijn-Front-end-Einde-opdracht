@@ -1,103 +1,118 @@
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Top Verhuur Auto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            background-color: #1f618d;
+        }
 
-const ContactPage = () => {
-    //Statische gegevens voor verhuurbedrijven en auto's
-    const rentalCompanies = [
-        { name: 'Autobedrijf A', cars: ['Auto A1', 'Auto A2', 'Auto A3', 'Auto A4', 'Auto A5', 'Auto A6', 'Auto A7', 'Auto A8', 'Auto A9', 'Auto A10'] },
-        { name: 'Autobedrijf B', cars: ['Auto B1', 'Auto B2', 'Auto B3', 'Auto B4', 'Auto B5', 'Auto B6', 'Auto B7', 'Auto B8', 'Auto B9', 'Auto B10'] },
-        { name: 'Autobedrijf C', cars: ['Auto C1', 'Auto C2', 'Auto C3', 'Auto C4', 'Auto C5', 'Auto C6', 'Auto C7', 'Auto C8', 'Auto C9', 'Auto C10'] },
-        { name: 'Autobedrijf D', cars: ['Auto D1', 'Auto D2', 'Auto D3', 'Auto D4', 'Auto D5', 'Auto D6', 'Auto D7', 'Auto D8', 'Auto D9', 'Auto D10'] },
-        { name: 'Autobedrijf E', cars: ['Auto E1', 'Auto E2', 'Auto E3', 'Auto E4', 'Auto E5', 'Auto E6', 'Auto E7', 'Auto E8', 'Auto E9', 'Auto E10'] },
-        { name: 'Autobedrijf F', cars: ['Auto F1', 'Auto F2', 'Auto F3', 'Auto F4', 'Auto F5', 'Auto F6', 'Auto F7', 'Auto F8', 'Auto F9', 'Auto F10'] },
-        { name: 'Autobedrijf G', cars: ['Auto G1', 'Auto G2', 'Auto G3', 'Auto G4', 'Auto G5', 'Auto G6', 'Auto G7', 'Auto G8', 'Auto G9', 'Auto G10'] },
-        { name: 'Autobedrijf H', cars: ['Auto H1', 'Auto H2', 'Auto H3', 'Auto H4', 'Auto H5', 'Auto H6', 'Auto H7', 'Auto H8', 'Auto H9', 'Auto H10'] },
-        { name: 'Autobedrijf I', cars: ['Auto I1', 'Auto I2', 'Auto I3', 'Auto I4', 'Auto I5', 'Auto I6', 'Auto I7', 'Auto I8', 'Auto I9', 'Auto I10'] },
-        { name: 'Autobedrijf J', cars: ['Auto J1', 'Auto J2', 'Auto J3', 'Auto J4', 'Auto J5', 'Auto J6', 'Auto J7', 'Auto J8', 'Auto J9', 'Auto J10'] },
-    ];
+        h1 {
+            color: #333;
+        }
 
-    const [selectedCompany, setSelectedCompany] = useState(rentalCompanies[0]);
-    const [selectedCars, setSelectedCars] = useState([]);
-    const [userData, setUserData] = useState({ name: '', email: '', message: '' });
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    const handleCompanyChange = (event) => {
-        const company = rentalCompanies.find(c => c.name === event.target.value);
-        setSelectedCompany(company);
-        setSelectedCars([]);
-    };
+        label {
+            display: block;
+            margin-top: 15px;
+        }
 
-    const handleCarChange = (event) => {
-        const car = event.target.value;
-        setSelectedCars(prevCars =>
-                prevCars.includes(car)
-                        ? prevCars.filter(item => item !== car)
-                        : [...prevCars, car]
-        );
-    };
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Verzend de gegevens, bijvoorbeeld via een API-aanroep
-        console.log('Verzonden gegevens:', { htps://high-mobility.com});
-    };
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    return (
-            <div>
-                <h1>Contactpagina</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Naam:</label>
-                        <input
-                                type="text"
-                                value={userData.name}
-                                onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-                                required
-                        />
-                    </div>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                                type="email"
-                                value={userData.email}
-                                onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-                                required
-                        />
-                    </div>
-                    <div>
-                        <label>Bericht:</label>
-                        <textarea
-                                value={userData.message}
-                                onChange={(e) => setUserData({ ...userData, message: e.target.value })}
-                                required
-                        />
-                    </div>
-                    <div>
-                        <label>Kies een verhuurbedrijf:</label>
-                        <select onChange={handleCompanyChange} value={selectedCompany.name}>
-                            {rentalCompanies.map((company, index) => (
-                                    <option key={index} value={company.name}>{company.name}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label>Kies je top 5 auto's:</label>
-                        <div>
-                            {selectedCompany.cars.slice(0, 5).map((car, index) => (
-                                    <label key={index}>
-                                        <input
-                                                type="checkbox"
-                                                value={car}
-                                                checked={selectedCars.includes(car)}
-                                                onChange={handleCarChange}
-                                        />
-                                        {car}
-                                    </label>
-                            ))}
-                        </div>
-                    </div>
-                    <button type="submit">Verzenden</button>
-                </form>
-            </div>
-    );
-};
+        button:hover {
+            background-color: #0056b3;
+        }
 
-export default ContactPage;
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Neem contact met ons op</h1>
+
+<form id="contactForm">
+    <label for="name">Naam *</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">E-mailadres *</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="subject">Onderwerp *</label>
+    <input type="text" id="subject" name="subject" required>
+
+    <label for="message">Bericht *</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Verzend</button>
+    <div id="feedback" class="feedback"></div>
+</form>
+
+<div class="contact-info">
+    <h2>Contactgegevens</h2>
+    <p><strong>E-mail:</strong> beheer@topverhuurauto.nl</p>
+    <p><strong>Telefoon:</strong> 030-6701234</p>
+    <p><strong>Bedrijfsnaam:</strong> Top Verhuur Auto B.V.</p>
+    <p><strong>Openingstijden:</strong> Maandag t/m Vrijdag, 09:00 – 17:00</p>
+    <p><strong>Responstijd:</strong> Binnen 24 uur</p>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const feedback = document.getElementById('feedback');
+
+        if (!name || !email || !subject || !message) {
+            feedback.textContent = 'Vul alle verplichte velden in.';
+            feedback.style.color = 'red';
+            return;
+        }
+
+        // Simuleer succesvolle verzending
+        feedback.textContent = 'Bericht verzonden!';
+        feedback.style.color = 'green';
+        this.reset();
+    });
+</script>
+
+</body>
+</html>
+
